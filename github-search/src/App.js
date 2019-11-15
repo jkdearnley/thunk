@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 
 class App extends Component {
   handleSubmit = e => {
@@ -7,6 +8,7 @@ class App extends Component {
     console.log(username);
   };
   render() {
+    console.log(this.props.data);
     return (
       <div className="container">
         <form onSubmit={this.handleSubmit} className="form">
@@ -16,11 +18,17 @@ class App extends Component {
             placeholder="Enter Github Username"
             required
             ref={input => (this.getUsername = input)}
-            />
-            <button className="button">Submit</button>
+          />
+          <button className="button">Submit</button>
         </form>
       </div>
     );
   }
 }
-export default App;
+
+const mapStateToProps = state => {
+  return {
+    data: state
+  };
+};
+export default connect(mapStateToProps)(App);
